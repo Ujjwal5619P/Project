@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Citizen Hazard Reports</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background:#f3f4f6; padding:20px;}
+    h1 { text-align:center; margin-bottom:20px;}
+    form { max-width:600px; margin:auto; background:white; padding:20px; border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,0.1);}
+    label { display:block; margin-bottom:10px; font-weight:bold; }
+    input, textarea, select { width:100%; padding:8px; margin-top:4px; border-radius:6px; border:1px solid #ccc;}
+    button { background:#4f46e5; color:white; padding:10px 20px; border:none; border-radius:8px; cursor:pointer; margin-top:10px;}
+    button:hover { background:#3730a3; }
+    .report-container { max-width:900px; margin:30px auto; background:white; padding:20px; border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,0.1);}
+    .report-card { padding:15px; border-bottom:1px solid #ddd; margin-bottom:15px; border-radius:10px; background:linear-gradient(145deg,#fefefe,#e0e7ff);}
+    .report-card:last-child { border-bottom:none; }
+    .status-approved { background:#28a745; color:white; padding:4px 10px; border-radius:12px; }
+    .status-pending { background:#ff9800; color:white; padding:4px 10px; border-radius:12px; }
+    .status-rejected { background:#e53935; color:white; padding:4px 10px; border-radius:12px; }
+    .severity-low { background:rgba(86,171,47,0.7); color:white; padding:4px 10px; border-radius:12px; }
+    .severity-moderate { background:rgba(255,179,71,0.8); color:white; padding:4px 10px; border-radius:12px; }
+    .severity-high { background:rgba(229,57,53,0.8); color:white; padding:4px 10px; border-radius:12px; }
+    .media-container { display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+    img, video { max-width:100%; border-radius:8px; cursor:pointer; }
+  </style>
+</head>
+<body>
+
+<h1>Submit Citizen Hazard Report</h1>
+<form id="reportForm" enctype="multipart/form-data">
+  <label>Hazard Type: <input type="text" name="hazard_type" required></label>
+  <label>Location: <input type="text" name="location" required></label>
+  <label>Description: <textarea name="description" required></textarea></label>
+  <label>Severity:
+    <select name="severity" required>
+      <option value="low">Low</option>
+      <option value="moderate">Moderate</option>
+      <option value="high">High</option>
+    </select>
+  </label>
+  <label>Upload Files: <input type="file" name="files" multiple></label>
+  <button type="submit">Submit Report</button>
+</form>
+
+<div class="report-container" id="officialReportsContainer">
+  <h2>Official Reports</h2>
+</div>
+
+<div class="report-container" id="citizenReportsContainer">
+  <h2>Approved Citizen Reports</h2>
+</div>
+
+<script>
+const API_BASE = "http://127.0.0.1:8000";
+
+async function fetchReports() {
+  try {
+    const [officialRes, citizenRes] = await Promise.all([
+      fetch(`${API_BASE}/reports/official`),
+      fetch(`${API_BASE}/reports/citizen`)
+    ]);
+
+    const officialReports = await officialRes.json();
+    const citizenReports = await citizenRes.json();
+
+    console.log("Official Reports:", officialReports);
+    console.log("Citizen Reports:", citizenReports);
+
+    populateReports("officialReportsContainer", officialReports, true);
+    populateReports("citizenReportsContainer", citizenReports, false);
+
+  } catch(err) {
+    console.error("Error fetching reports:", err);
+  }
+}
+
+function populateReports(containerId, data, official=false) {
+  const container = document.getElementById(containerId);
+  const heading = container.querySelector("h2").outerHTML;
+  container.innerHTML = heading;
+
+  if (!data || !data.length) {
+    container.innerHTML += `<p style="text-align:center;color:gray;">No reports available.</p>`;
+    return;
+  }
+
+  data.forEach(r => {
+    // Ensure files is always an array
+    let files = Array.isArray(r.files) ? r.files : [];
+    if (typeof r.files === "string" && r.files.startsWith("[")) {
+      try { files = JSON.parse(r.files); } catch(e){ files = []; }
+    }
+
+    // Handle created_at null
+    const createdAt = r.created_at ? new Date(r.created_at).toLocaleString() : "N/A";
+
+    // CSS classes
+    const statusClass = r.status ? "status-" + r.status.toLowerCase() : "";
+    const severityClass = r.severity ? "severity-" + r.severity.toLowerCase() : "";
+
+    // Media HTML
+    let filesHtml = "";
+    if (files.length) {
+      filesHtml = `<div class="media-container">` +
+        files.map(f => {
+          if(f.endsWith(".mp4") || f.endsWith(".mov"))
+            return `<video src="${API_BASE}${f}" controls style="height:150px;"></video>`;
+          return `<img src="${API_BASE}${f}" style="height:150px;" onclick="window.open('${API_BASE}${f}')">`;
+        }).join("") +
+      `</div>`;
+    }
+
+    container.innerHTML += `
+      <div class="report-card">
+        <div><strong>ID:</strong> ${r.id}</div>
+        <div><strong>Hazard:</strong> ${r.hazard_type}</div>
+        <div><strong>Location:</strong> ${r.location}</div>
+        <div><strong>Description:</strong> ${r.description}</div>
+        <div><strong>Status:</strong> <span class="${statusClass}">${r.status || "N/A"}</span></div>
+        <div><strong>Severity:</strong> <span class="${severityClass}">${r.severity || "N/A"}</span></div>
+        <div><strong>Time:</strong> ${createdAt}</div>
+        ${filesHtml}
+      </div>
+    `;
+  });
+}
+
+// Initial fetch
+fetchReports();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,142 @@
+[
+  {
+    "id": "1",
+    "hazard_type": "Cyclone Alert",
+    "location": "Odisha, India",
+    "description": "Heavy rain and gusty winds expected in Bhubaneswar and Cuttack due to a cyclonic circulation off the Odisha coast.",
+    "severity": "high"
+  },
+  {
+    "id": "2",
+    "hazard_type": "Heatwave Warning",
+    "location": "Delhi, India",
+    "description": "Real-feel temperatures reaching 51.9°C; IMD issues red alert for extreme heat-related health risks.",
+    "severity": "high"
+  },
+  {
+    "id": "3",
+    "hazard_type": "Flood Advisory",
+    "location": "Assam, India",
+    "description": "Severe flooding in Cachar district; over 6.8 lakh people affected across 21 districts.",
+    "severity": "high"
+  },
+  {
+    "id": "4",
+    "hazard_type": "Thunderstorm Alert",
+    "location": "Mumbai, India",
+    "description": "Orange alert issued for Mumbai, Thane, Raigad, and Palghar due to heavy rainfall and gusty winds.",
+    "severity": "moderate"
+  },
+  {
+    "id": "5",
+    "hazard_type": "Air Quality Alert",
+    "location": "Delhi, India",
+    "description": "Air quality index (AQI) at 97; moderate pollution levels expected to improve with rainfall.",
+    "severity": "moderate"
+  },
+  {
+    "id": "6",
+    "hazard_type": "Landslide Warning",
+    "location": "Kerala, India",
+    "description": "SLIP-K app developed to provide timely alerts based on rainfall and terrain data; aimed at reducing landslide risks.",
+    "severity": "moderate"
+  },
+  {
+    "id": "7",
+    "hazard_type": "Wildfire Alert",
+    "location": "Rajasthan, India",
+    "description": "564 fire alerts reported in 2025; ongoing monitoring of forest fire risks.",
+    "severity": "moderate"
+  },
+  {
+    "id": "8",
+    "hazard_type": "Earthquake Alert",
+    "location": "Uttarakhand, India",
+    "description": "3.9 magnitude earthquake recorded near Dehra Dūn; no significant damage reported.",
+    "severity": "low"
+  },
+  {
+    "id": "9",
+    "hazard_type": "Tsunami Warning",
+    "location": "Andaman & Nicobar Islands, India",
+    "description": "No current tsunami threat; continuous monitoring by National Center for Seismology.",
+    "severity": "low"
+  },
+  {
+    "id": "10",
+    "hazard_type": "Fog Alert",
+    "location": "Punjab, India",
+    "description": "Dense fog expected in early mornings; reduced visibility on roads.",
+    "severity": "moderate"
+  },
+  {
+    "id": "11",
+    "hazard_type": "Cyclone Alert",
+    "location": "West Bengal, India",
+    "description": "Cyclone 'Dana' expected to impact coastal regions; authorities on high alert.",
+    "severity": "high"
+  },
+  {
+    "id": "12",
+    "hazard_type": "Heatwave Warning",
+    "location": "Rajasthan, India",
+    "description": "Temperatures exceeding 44°C; residents advised to stay indoors during peak heat hours.",
+    "severity": "high"
+  },
+  {
+    "id": "13",
+    "hazard_type": "Flood Advisory",
+    "location": "Bihar, India",
+    "description": "Rising water levels in Ganga and Koshi rivers; flood preparedness measures activated.",
+    "severity": "moderate"
+  },
+  {
+    "id": "14",
+    "hazard_type": "Thunderstorm Alert",
+    "location": "Kolkata, India",
+    "description": "Thunderstorms with heavy rainfall expected; advisory issued for low-lying areas.",
+    "severity": "moderate"
+  },
+  {
+    "id": "15",
+    "hazard_type": "Air Quality Alert",
+    "location": "Lucknow, India",
+    "description": "PM2.5 levels at hazardous levels; residents advised to limit outdoor activities.",
+    "severity": "high"
+  },
+  {
+    "id": "16",
+    "hazard_type": "Landslide Warning",
+    "location": "Himachal Pradesh, India",
+    "description": "Continuous rainfall increases landslide risk in mountainous regions.",
+    "severity": "moderate"
+  },
+  {
+    "id": "17",
+    "hazard_type": "Wildfire Alert",
+    "location": "Uttarakhand, India",
+    "description": "Forest fires reported in Nainital and Almora districts; firefighting operations underway.",
+    "severity": "moderate"
+  },
+  {
+    "id": "18",
+    "hazard_type": "Earthquake Alert",
+    "location": "Sikkim, India",
+    "description": "4.2 magnitude earthquake recorded; minor tremors felt in Gangtok.",
+    "severity": "low"
+  },
+  {
+    "id": "19",
+    "hazard_type": "Tsunami Warning",
+    "location": "Tamil Nadu, India",
+    "description": "No tsunami threat; routine monitoring by National Center for Seismology.",
+    "severity": "low"
+  },
+  {
+    "id": "20",
+    "hazard_type": "Fog Alert",
+    "location": "Uttar Pradesh, India",
+    "description": "Dense fog expected in early mornings; reduced visibility on roads.",
+    "severity": "moderate"
+  }
+]
