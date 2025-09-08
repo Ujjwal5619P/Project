@@ -3,7 +3,6 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers import reports
 from app.database import Base, engine
-from app.routers import reports
 
 Base.metadata.create_all(bind=engine)
 
